@@ -5,9 +5,41 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  background-color: var(--main-color);
+}
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--main-color);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #3b435c;
+  border-radius: 5px;
+}
+
+
+:root{
+  --main-color: #131723;
+}
+
+
+.brdr{
+  height: 1px;
+  background-color: #a8a8a83d;
+}
+
+nav{
+  background-color: #131723;
+  box-shadow: 0 -3px 20px 0px black;
+}
+
+a{
+  text-decoration: none;
 }
