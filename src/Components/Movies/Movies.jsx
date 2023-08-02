@@ -46,7 +46,7 @@ const MoviesApp = () => {
     <div className='mt-5'>
       <div className="movie-list container">
         <div className="row">
-          <div className="col-md-4 d-flex justify-content-center flex-column">
+          <div className="col-md-4 d-flex justify-content-center flex-column  mb-3 mb-md-0">
             <div className="brdr w-25 mb-3"></div>
             <h2 className='text-white'>Popular Movies <br/> To Watch Now</h2>
             <p className='text-white fw-light opacity-25'>Most Popular Movies</p>

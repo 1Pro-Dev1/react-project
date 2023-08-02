@@ -52,9 +52,11 @@ async function getMediaData(id, type) {
     <div className="row mt-5 text-white">
         <div className="col-md-4">
             {Mtype==="person"?
-            <img src={`${mediaData.profile_path===null?"https://cdn.discordapp.com/attachments/1095603862871740418/1133817660686225510/person.jpg":`https://image.tmdb.org/t/p/w500/${mediaData.profile_path}`}`} className='w-100' />:
-            <img src={`https://image.tmdb.org/t/p/w500${mediaData.poster_path}`} className='w-100' />
+            <img alt='alt' src={`${mediaData.profile_path===null?"https://cdn.discordapp.com/attachments/1095603862871740418/1133817660686225510/person.jpg":`https://image.tmdb.org/t/p/w500/${mediaData.profile_path}`}`} className='w-100' />:
+            <img alt='alt' src={`https://image.tmdb.org/t/p/w500${mediaData.poster_path}`} className='w-100' />
             }
+            {Mtype==="person"?
+            <h1 className='d-block d-md-none mt-1'>{mediaData.title}{mediaData.name}</h1>:""}
             {Mtype==="person"?
             <div>
               <h3 className='mt-2'>Personal Info:</h3>
@@ -64,7 +66,7 @@ async function getMediaData(id, type) {
               </div>
               <div className="detail mt-3">
                 <h5 className='mb-0'>Gender:</h5>
-                <p >{mediaData.gender!==null?`${mediaData.gender===2?"Male":"Female"}`:"unknown"}</p>
+                <p>{mediaData.gender!==0?`${mediaData.gender===1?"Female":`${mediaData.gender===2?"Male":"Non-binary"}`}`:"Not set"}</p>
               </div>
               <div className="detail mt-3">
                 <h5 className='mb-0'>Birthday:</h5>
@@ -83,7 +85,7 @@ async function getMediaData(id, type) {
             </div>:""}
         </div>
         <div className="col-md-8">
-            <h1>{mediaData.title}{mediaData.name}</h1>
+            {Mtype==="person"?<h1 className='d-none d-md-block'>{mediaData.title}{mediaData.name}</h1>:<h1>{mediaData.title}{mediaData.name}</h1>}
             {Mtype!=="person"?<h6 className='opacity-25'>{mediaData.tagline}</h6>:""}
             {Mtype!=="person"?<div className="d-flex flex-row mt-3">
                 {mediaData.genres?.map((genre, i)=> <p className='m-0 bg-primary py-1 px-2 rounded-2 me-2' key={i}>{genre.name}</p>)}
@@ -98,7 +100,7 @@ async function getMediaData(id, type) {
             {Mtype==="person"?<><h1>Known for:</h1>
             <div className="d-flex flex-row mb-1" style={{flexWrap:"nowrap", overflowX:"scroll"}}>
                 {personMedia?.slice(0,10).map((media) => 
-                <Link className='col-md-2 me-3 mb-2 bg-white rounded-3 overflow-hidden' to={`/media/${media.media_type}/${media.id}`} onClick={() => handleCastLinkClick(media.id, media.media_type)}>
+                <Link className='col-md-2 col-8 me-3 mb-2 bg-white rounded-3 overflow-hidden' to={`/media/${media.media_type}/${media.id}`} onClick={() => handleCastLinkClick(media.id, media.media_type)} key={media.id} >
                     <img src={media.poster_path===null?"https://cdn.discordapp.com/attachments/1095603862871740418/1133817660686225510/person.jpg":`https://image.tmdb.org/t/p/w500${media.poster_path}`} className='w-100' alt="" />
                     <p className='m-0 text-black ms-2'>{media.title}</p>
                 </Link>
@@ -108,9 +110,9 @@ async function getMediaData(id, type) {
         </div>
         {Mtype!=="person"?<div className="col-md-12 row mt-5">
             <h1>Actors:</h1>
-            <div className="d-flex flex-row mb-1" style={{flexWrap:"nowrap", overflowX:"scroll"}}>
+            <div className="d-flex flex-row mb-1 ms-0" style={{flexWrap:"nowrap", overflowX:"scroll"}}>
                 {castData.map((caster) => caster.known_for_department==="Acting"?
-                <Link className='col-md-2 me-3 mb-2 bg-white rounded-3 overflow-hidden' to={`/media/person/${caster.id}`} onClick={() => handleCastLinkClick(caster.id, "person")}>
+                <Link className='col-md-2 col-8 me-3 mb-2 bg-white rounded-3 overflow-hidden' to={`/media/person/${caster.id}`} onClick={() => handleCastLinkClick(caster.id, "person")} key={caster.id}>
                     <img src={caster.profile_path===null?"https://cdn.discordapp.com/attachments/1095603862871740418/1133817660686225510/person.jpg":`https://image.tmdb.org/t/p/w500${caster.profile_path}`} className='w-100' alt="" />
                     <p className='m-0 text-black ms-2 fw-bold'>{caster.name}</p>
                     <p className='m-0 text-black ms-2 fw-light'>{caster.character}</p>

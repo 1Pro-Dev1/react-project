@@ -1,6 +1,3 @@
-// import Function from "./Components/function/Function";
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
 import Layout from './Components/Layout/Layout';
 import Home from "./Components/Home/Home"
 import TV from "./Components/TV/TV"
@@ -20,19 +17,6 @@ let routers = createHashRouter([
 ])
 
 export default function App(){
-
-
-    let [trendingMovies, setTrendingMovies] = useState([]);
-
-    async function GetMovies() {
-        let {data} = await axios.get("https://api.themoviedb.org/3/trending/movie/week?api_key=f521fd813142db7585db6b91b387b9aa")
-        setTrendingMovies(data.results)
-    }
-
-    useEffect(() => {
-        GetMovies()
-    }, [])
-
 
     return <>
         <RouterProvider router={routers}/>
